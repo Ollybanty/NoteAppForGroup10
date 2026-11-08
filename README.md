@@ -46,15 +46,15 @@ The server starts on **http://localhost:3500**. Check that it's running by openi
 
 ## Team member names and what each person built
 
-| #   | Name                     | What they built                                                   |
-| --- | ------------------------ | ----------------------------------------------------------------- |
-| 1   | Oladele Ogunyemi         | Team lead. Server, app, routes, create note, get all notes, stats |
-| 2   | Orji Onyinyechi          | Move to trash, view trash                                         |
-| 3   | Okorie Peter Chinecherem | Duplicate note, restore from trash                                |
-| 4   | Oniwon Faith             | Delete note, bulk delete                                          |
-| 5   | Omeh Kingsley            | Update note                                                       |
-| 6   | Tayo Ajibade             | Empty trash                                                       |
-| 7   | Oladunni Amos Abimbola   | Pin note, archive note                                            |
-| 8   | Ovie Toby                | Favourite note                                                    |
-| 9   | Suru Emmanuel            | Get one note                                                      |
-| 10  | Omajuwa Leslie           | Get all tags                                                      |
+| #   | Name                     | What they built                                                                                                   |
+| --- | ------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| 1   | Oladele Ogunyemi         | Team lead. Server, app, routes, create note, get all notes, stats, file storage, logger, not found, error handler |
+| 2   | Orji Onyinyechi          | Move to trash, view trash                                                                                         |
+| 3   | Okorie Peter Chinecherem | Duplicate note, restore from trash                                                                                |
+| 4   | Oniwon Faith             | Delete note, bulk delete                                                                                          |
+| 5   | Omeh Kingsley            | Update note, validation                                                                                           |
+| 6   | Tayo Ajibade             | Empty trash                                                                                                       |
+| 7   | Oladunni Amos Abimbola   | Pin note, archive note                                                                                            |
+| 8   | Ovie Toby                | Favourite note                                                                                                    |
+| 9   | Suru Emmanuel            | Get one note, search, filter, sort and pagination                                                                 |
+| 10  | Omajuwa Leslie           | Get all tags                                                                                                      |
