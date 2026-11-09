@@ -2,8 +2,7 @@
 
 import { readNotes, writeNotes} from '../utils/fileStorage.js';
 
-// PATCH /api/notes/:id/restore
-// PLACEHOLDER: replace the line inside this function with your code. Keep the function name.
+
 export async function restoreNote(req, res) {
   const notes = await readNotes();
 
