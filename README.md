@@ -207,15 +207,15 @@ Every other file has an owner in its first line (`// to be handled by: ...`). On
 
 ## Team member names and what each person built
 
-| #   | Name                     | What they built                                                                                                               |
-| --- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Oladele Ogunyemi         | Team lead. Server, app, routes, create note, get all notes, stats, validation, file storage, logger, not found, error handler |
-| 2   | Orji Onyinyechi          | Move to trash, view trash                                                                                                     |
-| 3   | Okorie Peter Chinecherem | Duplicate note, restore from trash                                                                                            |
-| 4   | Oniwon Faith             | Delete note, bulk delete                                                                                                      |
-| 5   | Omeh Kingsley            | Update note                                                                                                                   |
-| 6   | Tayo Ajibade             | Empty trash, auto-delete after 30 days                                                                                        |
-| 7   | Oladunni Amos Abimbola   | Pin note, archive note                                                                                                        |
-| 8   | Ovie Toby                | Favourite note                                                                                                                |
-| 9   | Suru Emmanuel            | Get one note, search, filter, sort and pagination                                                                             |
-| 10  | Omajuwa Leslie           | Get all tags, Postman collection                                                                                              |
+| #   | Name                     | What they built                                                                                                        |
+| --- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| 1   | Oladele Ogunyemi         | Team lead. Server, app, routes, create note, get all notes, validation, file storage, logger, not found, error handler |
+| 2   | Orji Onyinyechi          | Move to trash, view trash                                                                                              |
+| 3   | Okorie Peter Chinecherem | Duplicate note, restore from trash                                                                                     |
+| 4   | Oniwon Faith             | Delete note, bulk delete                                                                                               |
+| 5   | Omeh Kingsley            | Update note, stats                                                                                                     |
+| 6   | Tayo Ajibade             | Empty trash, auto-delete after 30 days                                                                                 |
+| 7   | Oladunni Amos Abimbola   | Pin note, archive note                                                                                                 |
+| 8   | Ovie Toby                | Favourite note, favourites list, archived list                                                                         |
+| 9   | Suru Emmanuel            | Get one note, search, filter, sort and pagination                                                                      |
+| 10  | Omajuwa Leslie           | Get all tags, Postman collection                                                                                       |
