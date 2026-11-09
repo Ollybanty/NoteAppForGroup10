@@ -8,11 +8,11 @@ export async function deleteNote(req, res) {
 
   const noteToDelete = notes.find(note => note.id === id);
   if (noteToDelete === undefined) {
-    return res.status(404).json({ message: "Note not found" })
+    return res.status(404).json({ error: "Note not found" })
   }
 
   const updatedNotes = notes.filter(note => note.id !== id);
   await writeNotes(updatedNotes);
 
-  res.status(200).json({ message: 'Note has been deleted successfully' });
+  res.status(200).json({ message: 'Note deleted permanently' });
 }

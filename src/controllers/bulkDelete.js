@@ -8,7 +8,7 @@ export async function bulkDelete(req, res) {
 
   const allIdsExist = ids.every(id => notes.some(note => note.id === id));
   if (allIdsExist === false) {
-    return res.status(404).json({ message: "Note not found" });
+    return res.status(404).json({ error: "Note not found" });
   }
 
   const updatedNotes = notes.filter(note => !ids.includes(note.id));
