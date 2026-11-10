@@ -1,7 +1,6 @@
 // to be handled by: Okorie Peter
 
-import { readNotes, writeNotes} from '../utils/fileStorage.js';
-
+import { readNotes, writeNotes } from '../utils/fileStorage.js';
 
 export async function restoreNote(req, res) {
   const notes = await readNotes();
@@ -10,12 +9,12 @@ export async function restoreNote(req, res) {
 
   const note = notes.find((item) => item.id === noteId);
 
-  if(!note){
-     return res.status(404).json({error: "Note not found"});
+  if (!note) {
+    return res.status(404).json({ error: 'Note not found' });
   }
 
-  if(!note.isTrashed){
-    return res.status(400).json({error: "Note is not in trash"});
+  if (!note.isTrashed) {
+    return res.status(400).json({ error: 'Note is not in trash' });
   }
 
   note.isTrashed = false;
@@ -24,5 +23,5 @@ export async function restoreNote(req, res) {
 
   await writeNotes(notes);
 
-  return res.status(200).json({message: "Note restored successfully", data: note});
+  return res.status(200).json({ message: 'Note restored successfully', data: note });
 }
