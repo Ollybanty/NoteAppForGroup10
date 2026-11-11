@@ -1,7 +1,10 @@
 // to be handled by: Ovie Toby
+import { readNotes } from '../utils/fileStorage.js';
 
 // GET /api/notes/favorites
-// PLACEHOLDER: replace the line inside this function with your code. Keep the function name.
 export async function getFavorites(req, res) {
-  res.status(501).json({ error: 'Not built yet' });
+  const notes = await readNotes();
+  const favorites = notes.filter((note) => note.favorite && !note.isTrashed);
+
+  res.json({ data: favorites, count: favorites.length });
 }
