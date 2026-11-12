@@ -1,57 +1,40 @@
 // to be handled by: Oniwon Faith
 import { readNotes, writeNotes } from '../utils/fileStorage.js';
 // POST /api/notes/bulk-delete
-// PLACEHOLDER: replace the line inside this function with your code. Keep the function name.
+// Moves the notes to the trash, so they can still be restored
 export async function bulkDelete(req, res) {
-  const { ids } = req.body;
-  const notes = await readNotes()
+  const ids = req.body?.ids;
 
-  // const allIdsExist = ids.every(id => notes.some(note => note.id === id));
-  // if (allIdsExist === false) {
-  //   return res.status(404).json({ message: "Note not found" });
-  // }
+  if (!Array.isArray(ids) || ids.length === 0 || ids.some((id) => typeof id !== 'string')) {
+    return res.status(400).json({ error: '"ids" array of note ids cannot be empty' });
+  }
 
-  const missingIds = ids.filter(
-    id => !notes.some(note => note.id === id)
+  const notes = await readNotes();
+
+  const missingIds = ids.filter((id) => !notes.some((note) => note.id === id));
+  const alreadyTrashedIds = ids.filter((id) =>
+    notes.some((note) => note.id === id && note.isTrashed),
   );
-  const missingMessages = missingIds.map(
-    id => `${id} does not exist.`
-  );
-
-  const validIds = ids.filter(
-    id => notes.some(note => note.id === id)
+  const eligibleIds = ids.filter(
+    (id) => !missingIds.includes(id) && !alreadyTrashedIds.includes(id),
   );
 
-  const alreadyTrashedIds = ids.filter(
-    id => notes.some(note => note.id === id && note.isTrashed)
-  );
-  const trashedMessages = alreadyTrashedIds.map(
-    id => `${id} is already trashed.`
-  );
-
-  const eligibleIds = validIds.filter(
-    id => !alreadyTrashedIds.includes(id)
+  // this is done, so the updated notes keep their position in the file
+  const now = new Date().toISOString();
+  const updatedNotes = notes.map((note) =>
+    eligibleIds.includes(note.id)
+      ? { ...note, isTrashed: true, trashedAt: now, updatedAt: now }
+      : note,
   );
 
-  const filteredNotes = notes.filter(note => eligibleIds.includes(note.id) && !note.isTrashed);
-  const updatedNotes = filteredNotes.map(note => ({
-    ...note,
-    isTrashed: true,
-    trashedAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }));
+  await writeNotes(updatedNotes);
 
-  const remainingNotes = notes.filter(
-    note => !eligibleIds.includes(note.id)
-  );
-
-  const finalNotes = [...remainingNotes, ...updatedNotes]
-  await writeNotes(finalNotes);
-
-  return res.status(200).json({
-    message: 'Bulk trash operation completed',
-    trashedCount: updatedNotes.length,
-    missingMessages: missingMessages,
-    trashedMessages: trashedMessages
+  res.json({
+    message: `${eligibleIds.length} note(s) moved to trash`,
+    data: {
+      trashedIds: eligibleIds,
+      notFound: missingIds,
+      alreadyTrashed: alreadyTrashedIds,
+    },
   });
 }
