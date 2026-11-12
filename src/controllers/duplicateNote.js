@@ -11,14 +11,18 @@ export async function duplicateNote(req, res) {
   if (!originalNote) {
     return res.status(404).json({ error: 'Note not found' });
   }
+  if(originalNote.isTrashed){
+     return res.status(400).json({ error: 'Cannot duplicate a note that is in the trash' });
+  }
 
   const newId = randomUUID();
   const now = new Date().toISOString();
 
+
   const duplicatedNote = {
     ...originalNote,
     id: newId,
-    title: originalNote.title + ' (Duplicate)',
+    title: (originalNote.title + ' (Duplicate)').slice(0, 100),
     pinned: false,
     archived: false,
     favorite: false,
