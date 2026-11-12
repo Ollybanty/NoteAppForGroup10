@@ -6,7 +6,7 @@ export async function favoriteNote(req, res) {
   const notes = await readNotes();
   const note = notes.find((item) => item.id === req.params.id);
 
-  if (!note) {
+  if (!note || note.isTrashed) {
     return res.status(404).json({ error: 'Note not found' });
   }
 
