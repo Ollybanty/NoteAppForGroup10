@@ -8,7 +8,7 @@ export async function updateNote(req, res) {
   const { id } = req.params;
   const noteIndex = notes.findIndex((note) => note.id === id);
 
-  if (noteIndex === -1) {
+  if (noteIndex === -1 || notes[noteIndex].isTrashed) {
     return res.status(404).json({ error: 'Note not found' });
   }
 
@@ -18,10 +18,6 @@ export async function updateNote(req, res) {
     ...req.body,
     updatedAt: new Date().toISOString(),
   };
-
-  if (updatedNote.tags !== undefined) {
-    updatedNote.tags = [...new Set(updatedNote.tags.map((tag) => tag.trim().toLowerCase()))];
-  }
 
   notes[noteIndex] = updatedNote;
   await writeNotes(notes);
