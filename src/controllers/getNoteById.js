@@ -10,7 +10,7 @@ export async function getNoteById(req, res) {
     const { id } = req.params;
 
     const notes = await readNotes();
-    const note = notes.find(n => String(n.id) === id);
+    const note = notes.find((n) => String(n.id) === id);
 
     if (!note) {
       return res.status(404).json({ error: 'Note not found' });
