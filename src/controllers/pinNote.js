@@ -6,31 +6,25 @@
 //   res.status(501).json({ error: 'Not built yet' });
 // }
 
-import React, { useState } from "react";
+import { readNotes, writeNotes } from '../utils/fileStorage.js';
 
-const [note, setNote] = useState({
-  id: "3b241101-e2bb-4255-8caf-4136c566a962",
-  title: "Our first note",
-  content: "We are working on a new note app",
-  isPinned: false
-});
+// PATCH /api/notes/:id/pin
+export async function pinNote(req, res) {
+  const notes = await readNotes();
 
-const togglePlin = () => {
-  setNote({
-    ...note,
-    isPinned: !note.isPinned
+  const note = notes.find((note) => note.id === req.params.id);
+
+  if (!note || note.isTrashed) {
+    return res.status(404).json({ error: 'Note not found' });
+  }
+
+  note.pinned = !note.pinned;
+  note.updatedAt = new Date().toISOString();
+
+  await writeNotes(notes);
+
+  return res.json({
+    message: 'Pin status updated',
+    data: note
   });
-};
-
-return (
-  <div>
-    <h2>{note.title}</h2>
-    <p>{note.content}</p>
-
-    <button onClick={togglePin}>
-      {note.isPinned ? "Unpin Note 📌" : "Pin Note 📌"}
-    </button>
-  </div>
-);
-
-export default App;
+}
