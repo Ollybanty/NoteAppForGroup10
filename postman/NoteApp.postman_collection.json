@@ -1,0 +1,1376 @@
+{
+  "info": {
+    "_postman_id": "501d3b29-f560-4190-b941-19a7e5a7b9a6",
+    "name": "NoteApp-Group6",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60028464",
+    "_collection_link": "https://go.postman.co/collection/60028464-501d3b29-f560-4190-b941-19a7e5a7b9a6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "check server health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": [
+            {
+              "name": "check server health",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["health"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "49"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"31-4fCfk9FcD62A1DFuK5CuB/57atw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:10:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"ok\",\n  \"time\": \"2026-11-14T10:10:43.347Z\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notes",
+      "item": [
+        {
+          "name": "Create note",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const res = pm.response.json();\nif (res.data && res.data.id) {\n  pm.collectionVariables.set('noteId', res.data.id);\n}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Sample Note Test\",\n    \"content\": \"Note content has to be here\",\n    \"tags\": [\"Session\", \"Home\", \"Court\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"]
+            },
+            "description": "This endpoint creates a new note."
+          },
+          "response": [
+            {
+              "name": "Create note Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Our Note Test for Postman\", //required\n    \"content\": \"This is the content of the note\", //required\n    \"tags\": [\"For Tech crush\", \"For Group 6\", \"For Tutor Tobi\"] // Array of Strings\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notes",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "404"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"194-nsdG+Vj72k814lZTQXYw5uam67k\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:39:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note created successfully\",\n  \"data\": {\n    \"id\": \"73ed8991-12ac-4a97-bacd-e0debddac07a\",\n    \"title\": \"Our Note Test for Postman\",\n    \"content\": \"This is the content of the note\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": null,\n    \"pinned\": false,\n    \"archived\": false,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T10:39:31.935Z\",\n    \"updatedAt\": \"2026-11-14T10:39:31.935Z\"\n  }\n}"
+            },
+            {
+              "name": "Create note Failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"\",\n    \"content\": \"\",\n    \"tags\": [\"Session\", \"Home\", \"Court\"]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notes",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "69"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"45-7KRk4bzBS2YSxfi4ScnceSo8RZA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:32:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Validation failed\",\n  \"details\": [\n    \"\\\"title\\\" cannot be empty\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Notes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2106"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"83a-ItrO+rCOYbMKzevvuzWgEsRbzAM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:39:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"77777777-7777-4777-8777-777777777777\",\n      \"title\": \"Gym routine\",\n      \"content\": \"Monday: legs. Wednesday: arms. Friday: cardio.\",\n      \"tags\": [\n        \"health\"\n      ],\n      \"color\": \"red\",\n      \"pinned\": true,\n      \"archived\": false,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-05T06:00:00.000Z\",\n      \"updatedAt\": \"2026-11-05T06:00:00.000Z\"\n    },\n    {\n      \"id\": \"73ed8991-12ac-4a97-bacd-e0debddac07a\",\n      \"title\": \"Our Note Test for Postman\",\n      \"content\": \"This is the content of the note\",\n      \"tags\": [\n        \"for tech crush\",\n        \"for group 6\",\n        \"for tutor tobi\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-14T10:39:31.935Z\",\n      \"updatedAt\": \"2026-11-14T10:39:31.935Z\"\n    },\n    {\n      \"id\": \"57a323ec-a605-40a4-9012-142940f0052d\",\n      \"title\": \"Note Test for Postman\",\n      \"content\": \"This is the content of the note\",\n      \"tags\": [\n        \"for tech crush\",\n        \"for group 6\",\n        \"for tutor tobi\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-14T10:36:36.194Z\",\n      \"updatedAt\": \"2026-11-14T10:36:36.194Z\"\n    },\n    {\n      \"id\": \"44444444-4444-4444-8444-444444444444\",\n      \"title\": \"Book ideas\",\n      \"content\": \"Write about learning to code as a team lead.\",\n      \"tags\": [\n        \"personal\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-04T07:45:00.000Z\",\n      \"updatedAt\": \"2026-11-04T07:45:00.000Z\"\n    },\n    {\n      \"id\": \"33333333-3333-4333-8333-333333333333\",\n      \"title\": \"Express middleware notes\",\n      \"content\": \"Middleware runs in the order you add it with app.use.\",\n      \"tags\": [\n        \"school\",\n        \"node\"\n      ],\n      \"color\": \"blue\",\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-03T20:10:00.000Z\",\n      \"updatedAt\": \"2026-11-03T20:10:00.000Z\"\n    },\n    {\n      \"id\": \"22222222-2222-4222-8222-222222222222\",\n      \"title\": \"Shopping list\",\n      \"content\": \"Rice, beans, plantain, tomatoes, pepper.\",\n      \"tags\": [\n        \"home\",\n        \"shopping\"\n      ],\n      \"color\": \"green\",\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-02T17:30:00.000Z\",\n      \"updatedAt\": \"2026-11-02T17:30:00.000Z\"\n    }\n  ],\n  \"count\": 6,\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 6,\n    \"totalPages\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Note",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Single Note",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}"],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "373"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"175-BRQdWC4F6LxjxK72HGvkL9VSp94\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:23:29 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": false,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:18:13.790Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update a Note",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Our Note Test for Postman updated\",\n  \"content\": \"This content has been updated\",\n  \"tags\": [\n    \"for tech crush\",\n    \"for group 6\",\n    \"for tutor tobi\"\n  ],\n  \"color\": \"red\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"]
+            },
+            "description": "Send only the fields you want to change. Accepted colors are red, orange, yellow, green, blue, purple, pink, gray, or null to remove the color."
+          },
+          "response": [
+            {
+              "name": "Update a Note",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\n  {\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\" // Accepted colors are red, orange, yellow, green, blue, purple, pink, gray\n  }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "411"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"19b-UafSVw92dhVMysZns6Q+ym5wzWo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:18:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note updated successfully\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": false,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:18:13.790Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete a single Note",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete a single Note",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "38"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"26-T0O/LMNrugUmb6ChspknoTT0Jws\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:30:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note deleted permanently\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Pin a Note",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/pin",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "pin"]
+            }
+          },
+          "response": [
+            {
+              "name": "Pin a Note",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/pin",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "pin"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "403"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"193-vB+4FyPBKo8HTmej4HIBGezYqBU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:25:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Pin status updated\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": true,\n    \"archived\": false,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:25:00.566Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Archive a Note",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/archive",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "archive"]
+            }
+          },
+          "response": [
+            {
+              "name": "Archive a Note",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/archive",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "archive"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "411"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"19b-f/UoCrAqt2OSz64gKshNtSBtm4U\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:25:28 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note archived successfully\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": true,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:25:28.785Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Mark Note as Favorite",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/favorite",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "favorite"]
+            }
+          },
+          "response": [
+            {
+              "name": "Mark Note as Favorite",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/favorite",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "favorite"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "407"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"197-TWfIGFWF7HTml4llcwBY75TRH0o\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:26:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Favorite status updated\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": true,\n    \"favorite\": true,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:26:33.065Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Duplicate a Note",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/duplicate",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "duplicate"]
+            }
+          },
+          "response": [
+            {
+              "name": "Duplicate a Note",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/duplicate",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "duplicate"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "415"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"19f-PZdZi0pGg+/aspmhY1z0YrTXG4U\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:46:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note duplicated successfully\",\n  \"data\": {\n    \"id\": \"3f1e7a16-bd01-42d7-bd04-28d083adc38d\",\n    \"title\": \"Note Test for Postman (Duplicate)\",\n    \"content\": \"This is the content of the note\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": null,\n    \"pinned\": false,\n    \"archived\": false,\n    \"favorite\": false,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T10:46:37.219Z\",\n    \"updatedAt\": \"2026-11-14T10:46:37.219Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trash a Single Note",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/trash",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "trash"]
+            }
+          },
+          "response": [
+            {
+              "name": "Trash a Single Note",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/trash",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "trash"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "437"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1b5-/IfJJDS9Y0Z6E2u2Xpog51hZxKs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:28:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note moved to trash successfully\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": true,\n    \"favorite\": true,\n    \"isTrashed\": true,\n    \"trashedAt\": \"2026-11-14T11:28:32.930Z\",\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:28:32.930Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Trashed Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/trash",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "trash"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Trashed Notes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/trash",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "trash"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "773"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"305-klMbG0yKs2fe1A1f35AwfI9WZvU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:47:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Trashed notes retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"11111111-1111-4111-8111-111111111111\",\n      \"title\": \"Team meeting agenda\",\n      \"content\": \"Review PRs, assign remaining tasks, plan the demo.\",\n      \"tags\": [\n        \"work\",\n        \"team\"\n      ],\n      \"color\": \"yellow\",\n      \"pinned\": true,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": true,\n      \"trashedAt\": \"2026-11-12T07:34:33.841Z\",\n      \"createdAt\": \"2026-11-01T09:00:00.000Z\",\n      \"updatedAt\": \"2026-11-12T07:34:33.841Z\"\n    },\n    {\n      \"id\": \"88888888-8888-4888-8888-888888888888\",\n      \"title\": \"Draft to delete\",\n      \"content\": \"This note was moved to the trash two days ago.\",\n      \"tags\": [\n        \"test\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": false,\n      \"isTrashed\": true,\n      \"trashedAt\": \"2026-11-14T10:47:21.747Z\",\n      \"createdAt\": \"2026-11-07T11:00:00.000Z\",\n      \"updatedAt\": \"2026-11-14T10:47:21.747Z\"\n    }\n  ],\n  \"count\": 2\n}"
+            }
+          ]
+        },
+        {
+          "name": "Restore a Single Note From Trash",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/restore",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "restore"]
+            }
+          },
+          "response": [
+            {
+              "name": "Restore a Single Note From Trash",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/{{noteId}}/restore",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "{{noteId}}", "restore"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "410"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"19a-50P2NzJ+6DmjJeeQdzkFxcFoBbw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 11:28:59 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Note restored successfully\",\n  \"data\": {\n    \"id\": \"75ff271c-f3c8-4090-bc01-c5b284c5069e\",\n    \"title\": \"Our Note Test for Postman updated\",\n    \"content\": \"This content has been updated\",\n    \"tags\": [\n      \"for tech crush\",\n      \"for group 6\",\n      \"for tutor tobi\"\n    ],\n    \"color\": \"red\",\n    \"pinned\": false,\n    \"archived\": true,\n    \"favorite\": true,\n    \"isTrashed\": false,\n    \"trashedAt\": null,\n    \"createdAt\": \"2026-11-14T11:16:39.042Z\",\n    \"updatedAt\": \"2026-11-14T11:28:59.238Z\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Bulk Trash notes",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ids\": [\"11111111-1111-4111-8111-111111111111\", \"33333333-3333-4333-8333-333333333333\", \"55555555-5555-4555-8555-555555555555\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notes/bulk-trash",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "bulk-trash"]
+            }
+          },
+          "response": [
+            {
+              "name": "Bulk Trash notes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\"11111111-1111-4111-8111-111111111111\", \"33333333-3333-4333-8333-333333333333\", \"55555555-5555-4555-8555-555555555555\"]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notes/bulk-trash",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "bulk-trash"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "212"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"d4-Nxun69OmUvqLYH64xlVXyYawAbc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:52:24 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"2 note(s) moved to trash\",\n  \"data\": {\n    \"trashedIds\": [\n      \"33333333-3333-4333-8333-333333333333\",\n      \"55555555-5555-4555-8555-555555555555\"\n    ],\n    \"notFound\": [],\n    \"alreadyTrashed\": [\n      \"11111111-1111-4111-8111-111111111111\"\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Empty Trash",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/trash",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "trash"]
+            }
+          },
+          "response": [
+            {
+              "name": "Empty Trash",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/trash",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "trash"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"2 note(s) deleted permanently\",\n    \"data\": {\n        \"deletedCount\": 2\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Note Tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/tags",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "tags"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Note Tags",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/tags",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "tags"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "286"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"11e-S3p0ZHlYlA5vm3oQNV5QRDzed+s\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:32:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"tag\": \"school\",\n      \"count\": 2\n    },\n    {\n      \"tag\": \"home\",\n      \"count\": 2\n    },\n    {\n      \"tag\": \"church\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"house\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"shopping\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"node\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"personal\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"work\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"food\",\n      \"count\": 1\n    },\n    {\n      \"tag\": \"health\",\n      \"count\": 1\n    }\n  ],\n  \"count\": 10\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Note Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "stats"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Note Stats",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/stats",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "stats"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "92"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5c-/Pk1L9dIQDhvDgyFmjr0N+5tNNg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:32:48 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": {\n    \"total\": 10,\n    \"active\": 7,\n    \"favorites\": 3,\n    \"archived\": 3,\n    \"pinned\": 1,\n    \"trashed\": 3,\n    \"tags\": 10\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All favorites Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/favorites",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "favorites"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All favorites Notes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/favorites",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "favorites"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1007"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3ef-o1jfVXfCQ0QvNlFfoXaZUHBUDog\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:33:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"33333333-3333-4333-8333-333333333333\",\n      \"title\": \"Express middleware notes\",\n      \"content\": \"Middleware runs in the order you add it with app.use.\",\n      \"tags\": [\n        \"school\",\n        \"node\"\n      ],\n      \"color\": \"blue\",\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-03T20:10:00.000Z\",\n      \"updatedAt\": \"2026-11-03T20:10:00.000Z\"\n    },\n    {\n      \"id\": \"66666666-6666-4666-8666-666666666666\",\n      \"title\": \"Favourite recipes\",\n      \"content\": \"Jollof rice, egusi soup, moi moi.\",\n      \"tags\": [\n        \"home\",\n        \"food\"\n      ],\n      \"color\": \"orange\",\n      \"pinned\": false,\n      \"archived\": true,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-10-20T18:00:00.000Z\",\n      \"updatedAt\": \"2026-11-06T09:30:00.000Z\"\n    },\n    {\n      \"id\": \"77777777-7777-4777-8777-777777777777\",\n      \"title\": \"Gym routine\",\n      \"content\": \"Monday: legs. Wednesday: arms. Friday: cardio.\",\n      \"tags\": [\n        \"health\"\n      ],\n      \"color\": \"red\",\n      \"pinned\": true,\n      \"archived\": false,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-05T06:00:00.000Z\",\n      \"updatedAt\": \"2026-11-05T06:00:00.000Z\"\n    }\n  ],\n  \"count\": 3\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Archived Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes/archived",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "archived"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Archived Notes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes/archived",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes", "archived"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1015"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3f7-3v8IpID6XqPqDMatLCQV5E8P3uQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:33:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"6a479012-a3ab-4a99-8478-383de03adfec\",\n      \"title\": \"Personal Note\",\n      \"content\": \"This is the first note test.\",\n      \"tags\": [\n        \"school\",\n        \"church\",\n        \"house\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": true,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": \"2026-11-12T07:34:33.841Z\",\n      \"createdAt\": \"2026-11-09T04:30:34.852Z\",\n      \"updatedAt\": \"2026-11-12T07:34:33.841Z\"\n    },\n    {\n      \"id\": \"55555555-5555-4555-8555-555555555555\",\n      \"title\": \"Old project plan\",\n      \"content\": \"First draft of the note app plan. Replaced by the README.\",\n      \"tags\": [\n        \"work\"\n      ],\n      \"color\": null,\n      \"pinned\": false,\n      \"archived\": true,\n      \"favorite\": false,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-10-15T10:00:00.000Z\",\n      \"updatedAt\": \"2026-11-05T12:00:00.000Z\"\n    },\n    {\n      \"id\": \"66666666-6666-4666-8666-666666666666\",\n      \"title\": \"Favourite recipes\",\n      \"content\": \"Jollof rice, egusi soup, moi moi.\",\n      \"tags\": [\n        \"home\",\n        \"food\"\n      ],\n      \"color\": \"orange\",\n      \"pinned\": false,\n      \"archived\": true,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-10-20T18:00:00.000Z\",\n      \"updatedAt\": \"2026-11-06T09:30:00.000Z\"\n    }\n  ],\n  \"count\": 3\n}"
+            }
+          ]
+        },
+        {
+          "name": "Search Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notes?search=expres",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "expres"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Search Notes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/notes?search=expres",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["notes"],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "expres"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "428"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1ac-Rk8cyU71yfds0KjEsyx0YXB9I4M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Nov 2026 10:34:19 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"33333333-3333-4333-8333-333333333333\",\n      \"title\": \"Express middleware notes\",\n      \"content\": \"Middleware runs in the order you add it with app.use.\",\n      \"tags\": [\n        \"school\",\n        \"node\"\n      ],\n      \"color\": \"blue\",\n      \"pinned\": false,\n      \"archived\": false,\n      \"favorite\": true,\n      \"isTrashed\": false,\n      \"trashedAt\": null,\n      \"createdAt\": \"2026-11-03T20:10:00.000Z\",\n      \"updatedAt\": \"2026-11-03T20:10:00.000Z\"\n    }\n  ],\n  \"count\": 1,\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1,\n    \"totalPages\": 1\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3500/api"
+    },
+    {
+      "key": "noteId",
+      "value": ""
+    }
+  ]
+}
