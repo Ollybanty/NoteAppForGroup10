@@ -529,6 +529,26 @@ Response `404`:
 
 ---
 
+## Testing with Postman
+
+A Postman collection with every endpoint is in `postman/NoteApp.postman_collection.json`.
+
+1. Start the server with `npm run dev`
+2. In Postman, click **Import** and choose the file
+3. Run **Create note** first. It saves the new note's id, so the other requests use it automatically
+4. Every request has a saved example response, so you can see what it returns without running it
+
+The collection uses two variables, which you can change in the collection's **Variables** tab:
+
+| Variable  | Value                       | What it's for                                      |
+| --------- | --------------------------- | -------------------------------------------------- |
+| `baseUrl` | `http://localhost:3500/api` | The start of every URL                             |
+| `noteId`  | Set by **Create note**      | The note used by get, update, pin, trash and so on |
+
+**Empty Trash** and **Delete a single Note** remove notes for good, so run them last.
+
+---
+
 ## How to raise a Pull Request
 
 Nobody pushes directly to `dev` or `main`. Create your own branch from `dev`, push it, then open a Pull Request (PR) into `dev`.
