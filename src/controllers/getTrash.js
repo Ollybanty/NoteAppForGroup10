@@ -1,7 +1,15 @@
 // to be handled by: Orji Onyinyechi
+import { autoDelete } from '../utils/autoDelete.js';
 
 // GET /api/notes/trash
-// PLACEHOLDER: replace the line inside this function with your code. Keep the function name.
 export async function getTrash(req, res) {
-  res.status(501).json({ error: 'Not built yet' });
+  const notes = await autoDelete();
+
+  const trashedNotes = notes.filter((note) => note.isTrashed);
+
+  res.json({
+    message: 'Trashed notes retrieved successfully',
+    data: trashedNotes,
+    count: trashedNotes.length,
+  });
 }
