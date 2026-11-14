@@ -47,7 +47,7 @@ All note endpoints start with `http://localhost:3500/api/notes`.
 | PATCH  | `/api/notes/:id/restore`   | Brings a note back from the trash                  | 200     |
 | GET    | `/api/notes/trash`         | Gets the notes in the trash                        | 200     |
 | DELETE | `/api/notes/trash`         | Deletes everything in the trash forever            | 200     |
-| POST   | `/api/notes/bulk-delete`   | Moves many notes to the trash at once              | 200     |
+| POST   | `/api/notes/bulk-trash`    | Moves many notes to the trash at once              | 200     |
 | GET    | `/api/notes/favorites`     | Gets favourite notes                               | 200     |
 | GET    | `/api/notes/archived`      | Gets archived notes                                | 200     |
 | GET    | `/api/notes/tags`          | Gets every tag and how many notes use it           | 200     |
@@ -415,9 +415,9 @@ Response `200`:
 }
 ```
 
-### Bulk delete (move many notes to the trash)
+### Bulk trash (move many notes to the trash)
 
-`POST /api/notes/bulk-delete`
+`POST /api/notes/bulk-trash`
 
 This moves the notes to the **trash**, so they can still be restored. To delete them forever, empty the trash.
 
@@ -602,7 +602,7 @@ Every other file has an owner in its first line (`// to be handled by: ...`). On
 | 1   | Oladele Ogunyemi         | Team lead. Server, app, routes, create note, get all notes, validation, file storage, logger, not found, error handler |
 | 2   | Orji Onyinyechi          | Move to trash, view trash (with Oladele)                                                                               |
 | 3   | Okorie Peter Chinecherem | Duplicate note, restore from trash                                                                                     |
-| 4   | Oniwon Faith             | Delete note, bulk delete                                                                                               |
+| 4   | Oniwon Faith             | Delete note, bulk trash                                                                                                |
 | 5   | Omeh Kingsley            | Update note, stats                                                                                                     |
 | 6   | Tayo Ajibade             | Empty trash, auto-delete after 30 days                                                                                 |
 | 7   | Oladunni Amos Abimbola   | Pin note, archive note                                                                                                 |
