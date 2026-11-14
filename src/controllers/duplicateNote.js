@@ -3,21 +3,19 @@
 import { readNotes, writeNotes } from '../utils/fileStorage.js';
 import { randomUUID } from 'node:crypto';
 
+// POST /api/notes/:id/duplicate
 export async function duplicateNote(req, res) {
   const notes = await readNotes();
   const noteId = req.params.id;
   const originalNote = notes.find((item) => item.id === noteId);
 
-  if (!originalNote) {
+  // a note in the trash counts as not found, same as the other endpoints
+  if (!originalNote || originalNote.isTrashed) {
     return res.status(404).json({ error: 'Note not found' });
-  }
-  if(originalNote.isTrashed){
-     return res.status(400).json({ error: 'Cannot duplicate a note that is in the trash' });
   }
 
   const newId = randomUUID();
   const now = new Date().toISOString();
-
 
   const duplicatedNote = {
     ...originalNote,

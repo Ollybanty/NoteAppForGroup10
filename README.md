@@ -334,11 +334,11 @@ Response `201`:
 }
 ```
 
-Response `400` (the note is in the trash):
+Response `404` (wrong id, or the note is in the trash):
 
 ```json
 {
-  "error": "Cannot duplicate a note that is in the trash"
+  "error": "Note not found"
 }
 ```
 
