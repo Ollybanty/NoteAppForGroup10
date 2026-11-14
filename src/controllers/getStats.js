@@ -1,5 +1,4 @@
-//handled by Omeh Kingsley:
-
+// to be handled by: Omeh Kingsley
 import { autoDelete } from '../utils/autoDelete.js';
 
 // GET /api/notes/stats
