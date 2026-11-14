@@ -1,12 +1,13 @@
 // to be handled by: Oladele
 import { readNotes } from '../utils/fileStorage.js';
+import { applyListOptions } from '../utils/listOptions.js';
 
-// GET /api/notes
+// GET /api/notes   (supports ?tag= ?search= ?sort= ?order= ?page= ?limit= ?archived= ?favorite=)
 export async function getAllNotes(req, res) {
   const notes = await readNotes();
 
-  // as per our rules, we should not show trashed notes in the list of all notes.
-  const visible = notes.filter((note) => !note.isTrashed);
+  // listOptions hides trashed notes, then filters, sorts and splits into pages for us
+  const { notes: data, pagination } = applyListOptions(notes, req.query);
 
-  res.json({ data: visible, count: visible.length });
+  res.json({ data, count: data.length, pagination });
 }
