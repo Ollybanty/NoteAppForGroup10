@@ -1,4 +1,3 @@
-
 // to be handled by: Orji Onyinyechi
 
 import { readNotes, writeNotes } from '../utils/fileStorage.js';
@@ -32,4 +31,3 @@ export async function trashNote(req, res) {
     data: noteToTrash,
   });
 }
-
