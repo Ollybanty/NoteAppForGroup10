@@ -1,10 +1,5 @@
 // to be handled by: Suru Emmanuel
 
-// PLACEHOLDER: a simple version so other files can use this function today.
-// It only hides trashed notes and handles ?archived=true and ?favorite=true.
-// Replace it with the full version (filter, search, sort, paginate). Keep the function name
-// and the shape it returns: { notes, pagination }.
-
 export function applyListOptions(notes, query) {
   // Hide trashed
   let results = notes.filter((note) => !note.isTrashed);
@@ -15,7 +10,7 @@ export function applyListOptions(notes, query) {
 
   // Tag
   if (query.tag) {
-    results = results.filter((note) => note.tag === query.tag);
+    results = results.filter((note) => note.tags.includes(query.tag.toLowerCase()));
   }
 
   // Search using title or content, ignoring case
@@ -34,6 +29,10 @@ export function applyListOptions(notes, query) {
   const direction = query.order === 'asc' ? 1 : -1;
 
   results.sort((a, b) => {
+    // localeCompare ignores upper/lower case, so "apple" and "Zebra" sort A to Z
+    if (field === 'title') {
+      return a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }) * direction;
+    }
     if (a[field] < b[field]) return -1 * direction;
     if (a[field] > b[field]) return 1 * direction;
     return 0;
