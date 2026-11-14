@@ -8,9 +8,7 @@ export function logger(req, res, next) {
   // 'finish' runs after the response is sent, so the status code is known
   res.on('finish', () => {
     const ms = Date.now() - start; // this is used to get the time taken to process the request
-    console.log(
-      `This is the logger: ${req.method} ${req.originalUrl} → ${res.statusCode} (${ms}ms)`,
-    );
+    console.log(`${req.method} ${req.originalUrl} → ${res.statusCode} (${ms}ms)`);
   });
 
   next(); // as said by the tutor, this is to terminate the middleware and pass control onward. Without it the request hangs
