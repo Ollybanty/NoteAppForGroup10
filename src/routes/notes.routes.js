@@ -17,7 +17,7 @@ import { trashNote } from '../controllers/trashNote.js';
 import { restoreNote } from '../controllers/restoreNote.js';
 import { getTrash } from '../controllers/getTrash.js';
 import { emptyTrash } from '../controllers/emptyTrash.js';
-import { bulkDelete } from '../controllers/bulkDelete.js';
+import { bulkTrash } from '../controllers/bulkTrash.js';
 import { getTags } from '../controllers/getTags.js';
 import { getStats } from '../controllers/getStats.js';
 
@@ -37,7 +37,7 @@ router.get('/favorites', getFavorites); // Ovie
 router.get('/archived', getArchived); // Ovie
 router.get('/trash', getTrash); // Orji
 router.delete('/trash', emptyTrash); // Tayo
-router.post('/bulk-delete', bulkDelete); // Oniwon
+router.post('/bulk-trash', bulkTrash); // Oniwon
 
 // 3. Routes with an id
 router.get('/:id', getNoteById); // Suru

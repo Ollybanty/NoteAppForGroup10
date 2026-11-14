@@ -1,8 +1,8 @@
 // to be handled by: Oniwon Faith
 import { readNotes, writeNotes } from '../utils/fileStorage.js';
-// POST /api/notes/bulk-delete
+// POST /api/notes/bulk-trash
 // Moves the notes to the trash, so they can still be restored
-export async function bulkDelete(req, res) {
+export async function bulkTrash(req, res) {
   const ids = req.body?.ids;
 
   if (!Array.isArray(ids) || ids.length === 0 || ids.some((id) => typeof id !== 'string')) {
